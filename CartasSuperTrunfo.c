@@ -1,12 +1,20 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+
+// define uma constante para limpeza do terminal.
+#ifdef _WIN32
+    #define CLEAR "cls"
+#else
+    #define CLEAR "clear"
+#endif
 
 // Desafio Super Trunfo - Países
 // Tema 1 - Cadastro das Cartas
 // Este código inicial serve como base para o desenvolvimento do sistema de cadastro de cartas de cidades.
 // Siga os comentários para implementar cada parte do desafio.
-//Teste larissa
 
+// struct com os dados de uma carta.
 struct Carta
 {
     char nome[50];
@@ -16,10 +24,10 @@ struct Carta
     int pontosTuristicos;
 };
 
-struct Carta cadastrarCarta();
-void exibirCarta(struct Carta carta);
-int clean_scanf(const char *format, void *arg);
-void clean_fgets(char *str, int size);
+struct Carta cadastrarCarta(); // Método para cadastrar uma carta.
+void exibirCarta(struct Carta carta); // Método para exibir uma carta.
+int clean_scanf(const char *format, void *arg); // Método para fazer um scanf limpo sem problemas com buffer de \n
+void clean_fgets(char *str, int size); // Método para fazer um fgets limpo sem problemas com buffer de \n
 
 
 int main() {
@@ -30,6 +38,8 @@ int main() {
     // Solicite ao usuário que insira as informações de cada cidade, como o código, nome, população, área, etc.
     struct Carta carta = cadastrarCarta();
 
+    // Limpa o terminal
+    system(CLEAR);
 
     // Exibição dos Dados das Cartas:
     // Exiba os valores inseridos para cada atributo da cidade, um por linha.
@@ -37,7 +47,7 @@ int main() {
     
 
     // Aguarda uma tecla ser encerrada para finalizar o programa.
-    printf("\n\n Pressione uma tecla para encerrar o programa.\n");
+    printf("\n\n Pressione ENTER para encerrar o programa.\n");
     getchar();    
 
     return 0;
@@ -75,9 +85,13 @@ struct Carta cadastrarCarta() {
 }
 
 void exibirCarta(struct Carta carta) {
-    printf("%s\n", carta.nome);
-    printf("%i\n", carta.populacao);
-    printf("%i\n", carta.area);
-    printf("%i\n", carta.pib);
-    printf("%i\n", carta.pontosTuristicos);
+    printf("###################################\n");
+    printf("#         CARTA DE CIDADE         #\n");
+    printf("###################################\n");
+    printf("Cidade: ------------ %s\n", carta.nome);
+    printf("População: --------- %i\n", carta.populacao);
+    printf("Área: -------------- %i\n", carta.area);
+    printf("PIB: --------------- %i\n", carta.pib);
+    printf("Pontos Turísticos: - %i\n", carta.pontosTuristicos);
+    printf("###################################\n");
 }
