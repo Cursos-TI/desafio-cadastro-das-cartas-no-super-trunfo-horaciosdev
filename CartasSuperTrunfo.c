@@ -2,12 +2,6 @@
 #include <string.h>
 #include <stdlib.h>
 
-// Desafio Super Trunfo - Países
-// Tema 1 - Cadastro das Cartas
-// Este código inicial serve como base para o desenvolvimento do sistema de cadastro de cartas de cidades.
-// Siga os comentários para implementar cada parte do desafio.
-
-// struct com os dados de uma carta.
 struct Carta
 {
     char nome[50];
@@ -17,45 +11,35 @@ struct Carta
     int pontosTuristicos;
 };
 
+// Declaração dos métodos utilizados:
 struct Carta cadastrarCarta(); // Método para cadastrar uma carta.
-void cls(); // Método para limpar o terminal.
-void exibirCarta(struct Carta carta); // Método para exibir uma carta.
-int clean_scanf(const char *format, void *arg); // Método para fazer um scanf limpo sem problemas com buffer de \n
-void clean_fgets(char *str, int size); // Método para fazer um fgets limpo sem problemas com buffer de \n
+void cls(); // Método para limpar a tela do terminal utilizando um comando ANSI (foi o que funcionou melhor)
+void exibirCarta(struct Carta carta); // Metodo para exibir uma carta.
+int clean_scanf(const char *format, void *arg); // Método criado para evitar problemas de buffer no scanf.
+void clean_fgets(char *str, int size); // Método criado para evitar problemas de buffer no fgets.
 
 
 int main() {
     cls();
-    // Sugestão: Defina variáveis separadas para cada atributo da cidade.
-    // Exemplos de atributos: código da cidade, nome, população, área, PIB, número de pontos turísticos.
-    
-    // Cadastro das Cartas:
-    // Solicite ao usuário que insira as informações de cada cidade, como o código, nome, população, área, etc.
     struct Carta carta = cadastrarCarta();
-
-    // Limpa o terminal
     cls();
 
-    // Exibição dos Dados das Cartas:
-    // Exiba os valores inseridos para cada atributo da cidade, um por linha.
     exibirCarta(carta);    
-    
 
-    // Aguarda uma tecla ser encerrada para finalizar o programa.
     printf("\n\n Pressione ENTER para encerrar o programa.\n");
     getchar();    
 
     return 0;
 }
 int clean_scanf(const char *format, void *arg) {  
-    int result = scanf(format, arg); // Tenta ler a entrada  
-    while (getchar() != '\n');       // Limpa o buffer de entrada  
-    return result;                   // Retorna o resultado do scanf  
+    int result = scanf(format, arg);
+    while (getchar() != '\n');
+    return result;
 }
 
 void clean_fgets(char *str, int size) {
-    fgets(str, size, stdin); // Lê a string
-    str[strcspn(str, "\n")] = 0; // Remove o '\n' no final
+    fgets(str, size, stdin);
+    str[strcspn(str, "\n")] = 0;
 }
 
 void cls() {
