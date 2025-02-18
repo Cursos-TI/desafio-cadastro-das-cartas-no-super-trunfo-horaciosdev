@@ -2,13 +2,6 @@
 #include <string.h>
 #include <stdlib.h>
 
-// define uma constante para limpeza do terminal.
-#ifdef _WIN32
-    #define CLEAR "cls"
-#else
-    #define CLEAR "clear"
-#endif
-
 // Desafio Super Trunfo - Países
 // Tema 1 - Cadastro das Cartas
 // Este código inicial serve como base para o desenvolvimento do sistema de cadastro de cartas de cidades.
@@ -25,12 +18,14 @@ struct Carta
 };
 
 struct Carta cadastrarCarta(); // Método para cadastrar uma carta.
+void cls(); // Método para limpar o terminal.
 void exibirCarta(struct Carta carta); // Método para exibir uma carta.
 int clean_scanf(const char *format, void *arg); // Método para fazer um scanf limpo sem problemas com buffer de \n
 void clean_fgets(char *str, int size); // Método para fazer um fgets limpo sem problemas com buffer de \n
 
 
 int main() {
+    cls();
     // Sugestão: Defina variáveis separadas para cada atributo da cidade.
     // Exemplos de atributos: código da cidade, nome, população, área, PIB, número de pontos turísticos.
     
@@ -39,7 +34,7 @@ int main() {
     struct Carta carta = cadastrarCarta();
 
     // Limpa o terminal
-    system(CLEAR);
+    cls();
 
     // Exibição dos Dados das Cartas:
     // Exiba os valores inseridos para cada atributo da cidade, um por linha.
@@ -61,6 +56,10 @@ int clean_scanf(const char *format, void *arg) {
 void clean_fgets(char *str, int size) {
     fgets(str, size, stdin); // Lê a string
     str[strcspn(str, "\n")] = 0; // Remove o '\n' no final
+}
+
+void cls() {
+    printf("\033[H\033[J");
 }
 
 struct Carta cadastrarCarta() {
